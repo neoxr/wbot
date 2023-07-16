@@ -21,7 +21,7 @@ const client = new Baileys({
    sf: 'session',
    version: [2, 2318, 11]
 })
-
+global.neoxr = Commands
 client.on('connect', async () => {
    global.db = {users: [], chats: [], groups: [], setting: {}, ...(await machine.fetch() || {})}
    await machine.save(global.db)
@@ -68,7 +68,6 @@ client.on('ready', async info => {
    spinnies.succeed('start', {
       text: `${plugins.length} Plugins loaded`
    })
-   global.neoxr = Commands
 })
 
 client.on('message', async m => {
