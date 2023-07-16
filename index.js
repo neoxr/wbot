@@ -1,4 +1,3 @@
-const { Function: Func } = require('@neoxr/wb')
 require('dotenv').config(), require('rootpath')(), require('./lib/system/config')
 const { spawn: spawn } = require('child_process'), path = require('path'), colors = require('@colors/colors/safe'), CFonts = require('cfonts')
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
