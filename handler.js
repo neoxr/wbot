@@ -5,7 +5,7 @@ const moment = require('moment-timezone')
 moment.tz.setDefault(global.timezone).locale('id')
 module.exports = async (client, m, env, cache) => {
    try {
-      global.db.hitstat = global.db.hitstat ? global.db.hitstat : {}
+      global.db.statistic = global.db.statistic ? global.db.statistic : {}
       const body = typeof m.text == 'string' ? m.text : false
       const groupSet = global.db.groups.find(v => v.jid == m.chat),
          chats = global.db.chats.find(v => v.jid == m.chat),
