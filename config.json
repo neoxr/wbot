@@ -1,0 +1,10 @@
+{
+   "owner": "6285887776722",
+   "database": "data",
+   "ram_usage": 6500000000,
+   "max_upload": 60,
+   "cooldown": 5,
+   "timer": 43200000,
+   "blocks": ["994"],
+   "evaluate_chars":  ["=>", "~>", "<", ">", "$"]
+}
