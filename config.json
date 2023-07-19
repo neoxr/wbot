@@ -1,9 +1,0 @@
-{
-   "database": "data",
-   "ram_usage": 6500000000,
-   "max_upload": 60,
-   "max_upload_free": 7,
-   "cooldown": 3,
-   "evaluate_chars":  ["=>", "~>", "<", ">", "$"],
-   "footer": "ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ɴᴇᴏxʀ ッ"
-}
