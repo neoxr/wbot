@@ -1,8 +1,11 @@
 {
    "owner": "6285887776722",
+   "owner_name": "Wildan Izzudin",
    "database": "data",
+   "limit": 25,
    "ram_usage": 6500000000,
    "max_upload": 60,
+   "max_upload_free": 7,
    "cooldown": 5,
    "timer": 43200000,
    "blocks": ["994"],
