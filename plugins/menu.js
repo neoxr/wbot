@@ -60,6 +60,7 @@ exports.run = {
             client.sendMessageModify(m.chat, Func.Styles(print) + '\n\n' + global.footer, m, {
                ads: false,
                largeThumb: true,
+               thumbnail: setting.cover,
                url: setting.link
             })
          } else if (style == 2) {
@@ -113,6 +114,7 @@ exports.run = {
             client.sendMessageModify(m.chat, Func.Styles(print) + '\n\n' + global.footer, m, {
                ads: false,
                largeThumb: true,
+               thumbnail: setting.cover,
                url: setting.link
             })
          }

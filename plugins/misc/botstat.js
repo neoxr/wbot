@@ -34,7 +34,8 @@ exports.run = {
          }
          const system = global.db.setting
          client.sendMessageModify(m.chat, statistic(Func, stats, system), m, {
-            largeThumb: true
+            largeThumb: true,
+            thumbnail: setting.cover
          })
       } catch (e) {
          client.reply(m.chat, Func.jsonFormat(e), m)

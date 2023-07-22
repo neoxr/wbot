@@ -23,7 +23,7 @@
    "dependencies":{
       "@adiwajshing/keyed-db":"^0.2.4",
       "@colors/colors": "^1.6.0",
-      "@neoxr/wb": "^1.11.8",
+      "@neoxr/wb": "^1.11.9",
       "baileys": "6.0.7",
       "cfonts": "3.1.1",
       "json-stable-stringify": "^1.0.2",

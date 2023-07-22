@@ -27,7 +27,8 @@ exports.run = {
       teks += `\n\n${global.footer}`
       client.sendMessageModify(m.chat, teks, m, {
          ads: false,
-         largeThumb: true
+         largeThumb: true,
+         thumbnail: setting.cover
       })
    },
    error: false,
