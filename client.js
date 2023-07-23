@@ -7,12 +7,16 @@ const spinnies = new(require('spinnies'))(),
    colors = require('@colors/colors'),
    stable = require('json-stable-stringify'),
    env = require('./config.json')
+const cache = new(require('node-cache'))({
+   stdTTL: env.cooldown
+})
 if (process.env.DATABASE_URL && /mongo/.test(process.env.DATABASE_URL)) MongoDB.db = env.database
 const machine = (process.env.DATABASE_URL && /mongo/.test(process.env.DATABASE_URL)) ? MongoDB : (process.env.DATABASE_URL && /postgres/.test(process.env.DATABASE_URL)) ? PostgreSQL : new(require('./lib/system/localdb'))(env.database)
 const client = new Baileys({
    type: '--neoxr-v1',
    plugsdir: 'plugins',
    sf: 'session',
+   online: true,
    version: [2, 2318, 11]
 })
 
@@ -49,7 +53,7 @@ client.on('ready', async () => {
    setInterval(() => {
       const tmpFiles = fs.readdirSync('./temp')
       if (tmpFiles.length > 0) {
-         tmpFiles.map(v => fs.unlinkSync('./temp/' + v))
+         tmpFiles.filter(v => !v.endsWith('.file')).map(v => fs.unlinkSync('./temp/' + v))
       }
    }, 60 * 1000 * 3)
 
@@ -63,7 +67,13 @@ client.on('ready', async () => {
 client.on('message', ctx => require('./handler')(client.sock, ctx))
 
 /* print deleted message object */
-client.on('message.delete', ctx => ctx ? client.sock.copyNForward(ctx.chat, ctx.delete) : '')
+client.on('message.delete', ctx => {
+   const sock = client.sock
+   if (!ctx || ctx.fromMe) return
+   if (cache.has(ctx.sender) && cache.get(ctx.sender) === 1) return
+   cache.set(ctx.sender, 1)
+   if (ctx.group && global.db.groups.some(v => v.jid == ctx.chat) && global.db.groups.find(v => v.jid == ctx.chat).antidelete) return sock.copyNForward(ctx.chat, ctx.delete)
+})
 
 /* AFK detector */
 client.on('presence.update', update => {
