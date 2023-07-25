@@ -127,6 +127,8 @@ exports.run = {
 
 + ```limit``` : membatasi penggunaan fitur dengan limit, untuk mengatur jumlah limit berikan data integer dan untuk dafault adalah boolean true untuk 1.
 
++ ```premium``` : untuk membuat fitur khusus user premium
+
 + ```restrict``` : membatasi input, input yang di batasi berupa badword yang berada di db.setting.toxic.
 
 + ```cache``` : opsi untuk auto update pada saat selesai melakukan recode.
@@ -162,9 +164,9 @@ exports.run = {
 }
 ```
 
-```body``` : chat berupa text atau emoticon, plugin ini biasanya digunakan untuk auto respon atau group protector seperti anti link, anti toxic dll.
++ ```body``` : chat berupa text atau emoticon, plugin ini biasanya digunakan untuk auto respon atau group protector seperti anti link, anti toxic dll.
 
-```prefixes``` : parameter yang berisi seluruh prefix dalam bentuk array, untuk menggunakannya parsing berdasarkan index. (Cth : prefixes[0]).
++ ```prefixes``` : parameter yang berisi seluruh prefix dalam bentuk array, untuk menggunakannya parsing berdasarkan index. (Cth : prefixes[0]).
 
 Lainnya :
 ```Javascript
