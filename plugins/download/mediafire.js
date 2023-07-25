@@ -9,6 +9,7 @@ exports.run = {
       args,
       isPrefix,
       command,
+      users,
       env,
       Scraper,
       Func
