@@ -17,7 +17,7 @@ exports.run = {
          if (!args || !args[0]) return client.reply(m.chat, Func.example(isPrefix, command, 'https://www.mediafire.com/file/1fqjqg7e8e2v3ao/YOWA.v8.87_By.SamMods.apk/file'), m)
          if (!args[0].match(/(https:\/\/www.mediafire.com\/)/gi)) return client.reply(m.chat, global.status.invalid, m)
          client.sendReact(m.chat, '🕒', m.key)
-         const json = await Api.neoxr('/ig', {
+         const json = await Api.neoxr('/mediafire', {
             url: args[0]
          })    
          if (!json.status) return client.reply(m.chat, Func.jsonFormat(json), m)
