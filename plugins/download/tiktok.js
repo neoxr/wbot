@@ -18,7 +18,7 @@ exports.run = {
          const json = await Api.neoxr('/tiktok', {
             url: Func.ttFixed(args[0])
          })
-         if (!json.status || !json.data.video) return client.reply(m.chat, Func.texted('bold', `🚩 Error! private videos or videos not available.`), m)
+         if (!json.status || !json.data.video) return client.reply(m.chat, Func.jsonFormat(json), m)
          let caption = `乂  *T I K T O K*\n\n`
          caption += `	◦  *Author* : ${json.data.author.nickname} (@${json.data.author.username})\n`
          caption += `	◦  *Views* : ${Func.formatter(json.data.stats.play_count)}\n`

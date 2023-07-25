@@ -14,7 +14,7 @@ exports.run = {
       if (!text && !m.quoted) return client.reply(m.chat, Func.texted('bold', `🚩 Mention or Reply chat target.`), m)
       if (isNaN(number)) return client.reply(m.chat, Func.texted('bold', `🚩 Invalid number.`), m)
       if (number.length > 15) return client.reply(m.chat, Func.texted('bold', `🚩 Invalid format.`), m)
-      let pic = await Func.fetchBuffer('./media/image/default.jpg')
+      var pic = await Func.fetchBuffer('./media/image/default.jpg')
       try {
          if (text) {
             var user = number + '@s.whatsapp.net'
@@ -27,7 +27,7 @@ exports.run = {
          let target = global.db.users.find(v => v.jid == user)
          if (typeof target == 'undefined') return client.reply(m.chat, Func.texted('bold', `🚩 Can't find user data.`), m)
          try {
-            pic = await Func.fetchBuffer(await client.profilePictureUrl(user, 'image'))
+            var pic = await Func.fetchBuffer(await client.profilePictureUrl(user, 'image'))
          } catch (e) {} finally {
             let blocked = blockList.includes(user) ? true : false
             let now = new Date() * 1
@@ -35,7 +35,7 @@ exports.run = {
             let usebot = (target.usebot == 0) ? 'Never' : Func.toDate(now - target.usebot)
             let caption = `乂  *U S E R - P R O F I L E*\n\n`
             caption += `	◦  *Name* : ${target.name}\n`
-            caption += `	◦  * Limit* : ${Func.formatNumber(target.limit)}\n`
+            caption += `	◦  *Limit* : ${Func.formatNumber(target.limit)}\n`
             caption += `	◦  *Hitstat* : ${Func.formatNumber(target.hit)}\n`
             caption += `	◦  *Warning* : ${((m.isGroup) ? (typeof global.db.groups.find(v => v.jid == m.chat).member[user] != 'undefined' ? global.db.groups.find(v => v.jid == m.chat).member[user].warning : 0) + ' / 5' : target.warning + ' / 5')}\n\n`
             caption += `乂  *U S E R - S T A T U S*\n\n`

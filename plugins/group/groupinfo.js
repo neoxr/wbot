@@ -11,12 +11,12 @@ exports.run = {
    }) => {
       try {
          let setting = global.db.groups.find(v => v.jid == m.chat)
-         let pic = await Func.fetchBuffer('./media/image/default.jpg')
+         var pic = await Func.fetchBuffer('./media/image/default.jpg')
          let meta = await (await client.groupMetadata(m.chat))
          let admin = await client.groupAdmin(m.chat)
          let member = participants.map(u => u.id)
          try {
-            pic = await Func.fetchBuffer(await client.profilePictureUrl(m.chat, 'image'))
+            var pic = await Func.fetchBuffer(await client.profilePictureUrl(m.chat, 'image'))
          } catch {} finally {
             let caption = `乂  *G R O U P - I N F O*\n\n`
             caption += `	◦  *Name* : ${meta.subject}\n`

@@ -19,7 +19,7 @@ exports.run = {
          exec(`ffmpeg -i ${media} ${isFile}`, (err, stderr, stdout) => {
             remove(media)
             if (err) return client.reply(m.chat, Func.texted('bold', `🚩 Conversion failed.`), m)
-            buffer = read(isFile)
+            const buffer = read(isFile)
             client.sendFile(m.chat, buffer, '', '', m)
             remove(isFile)
          })

@@ -20,7 +20,8 @@ exports.run = {
          caption += global.footer
          client.sendMessageModify(m.chat, caption, m, {
             ads: false,
-            largeThumb: true
+            largeThumb: true,
+            thumbnail: setting.cover
          })
       } catch (e) {
          client.reply(m.chat, Func.jsonFormat(e), m)

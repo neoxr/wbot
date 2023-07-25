@@ -9,10 +9,10 @@ exports.run = {
       Func
    }) => {
       let user = global.db.users.find(v => v.jid == m.sender)
-      let pic = await Func.fetchBuffer('./media/image/default.jpg')
+      var pic = await Func.fetchBuffer('./media/image/default.jpg')
       let _own = [...new Set([global.owner, ...global.db.setting.owners])]
       try {
-         pic = await Func.fetchBuffer(await client.profilePictureUrl(m.sender, 'image'))
+         var pic = await Func.fetchBuffer(await client.profilePictureUrl(m.sender, 'image'))
       } catch {} finally {
          let blocked = blockList.includes(m.sender) ? true : false
          let now = new Date() * 1

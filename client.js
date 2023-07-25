@@ -68,11 +68,11 @@ client.on('message', ctx => require('./handler')(client.sock, ctx))
 
 /* print deleted message object */
 client.on('message.delete', ctx => {
-   const sock = client.sock
-   if (!ctx || ctx.fromMe) return
-   if (cache.has(ctx.sender) && cache.get(ctx.sender) === 1) return
-   cache.set(ctx.sender, 1)
-   if (ctx.group && global.db.groups.some(v => v.jid == ctx.chat) && global.db.groups.find(v => v.jid == ctx.chat).antidelete) return sock.copyNForward(ctx.chat, ctx.delete)
+   const sock = client.sock  
+   if (!ctx || ctx.origin.fromMe || ctx.origin.isBot) return
+   if (cache.has(ctx.origin.sender) && cache.get(ctx.origin.sender) === 1) return
+   cache.set(ctx.origin.sender, 1)
+   if (ctx.origin.isGroup && global.db.groups.some(v => v.jid == ctx.origin.chat) && global.db.groups.find(v => v.jid == ctx.origin.chat).antidelete) return sock.copyNForward(ctx.origin.chat, ctx.delete)
 })
 
 /* AFK detector */
@@ -97,11 +97,10 @@ client.on('group.add', async ctx => {
    const sock = client.sock
    const text = `Thanks +tag for joining into +grup group.`
    const groupSet = global.db.groups.find(v => v.jid == ctx.jid)
-   let pic
    try {
-      pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.member, 'image'))
+      var pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.member, 'image'))
    } catch {
-      pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.jid, 'image'))
+      var pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.jid, 'image'))
    }
 
    /* localonly to remove new member when the number not from indonesia */
@@ -125,11 +124,10 @@ client.on('group.remove', async ctx => {
    const sock = client.sock
    const text = `Good bye +tag :)`
    const groupSet = global.db.groups.find(v => v.jid == ctx.jid)
-   let pic
    try {
-      pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.member, 'image'))
+      var pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.member, 'image'))
    } catch {
-      pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.jid, 'image'))
+      var pic = await Func.fetchBuffer(await sock.profilePictureUrl(ctx.jid, 'image'))
    }
    const txt = (groupSet && groupSet.text_left ? groupSet.text_left : text).replace('+tag', `@${ctx.member.split`@`[0]}`).replace('+grup', `${ctx.subject}`)
    if (groupSet && groupSet.welcome) sock.sendMessageModify(ctx.jid, txt, null, {

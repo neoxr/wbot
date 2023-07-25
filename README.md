@@ -93,7 +93,7 @@ exports.run = {
 }
 ```
 
-#### Up Side Option :
+#### Up Side Options :
 
 + ```usage``` : command utama yang akan otomatis tampil dalam daftar menu, penggunaan usage bisa dalam bentuk array dan string.
 

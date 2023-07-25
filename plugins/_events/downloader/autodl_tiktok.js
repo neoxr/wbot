@@ -11,7 +11,6 @@ exports.run = {
       try {
          const regex = /^(?:https?:\/\/)?(?:www\.|vt\.|vm\.|t\.)?(?:tiktok\.com\/)(?:\S+)?$/;
          const extract = body ? Func.generateLink(body) : null
-         console.log(extract)
          if (extract) {
             const links = extract.filter(v => Func.ttFixed(v).match(regex))
             if (links.length != 0) {

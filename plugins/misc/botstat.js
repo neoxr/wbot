@@ -6,6 +6,7 @@ exports.run = {
    async: async (m, {
       client,
       blockList,
+      setting,
       Func
    }) => {
       try {
