@@ -3,12 +3,12 @@
    "owner_name": "Wildan Izzudin",
    "database": "data",
    "limit": 25,
-   "ram_usage": 6500000000,
+   "ram_limit": "1.5gb",
    "max_upload": 60,
    "max_upload_free": 10,
    "cooldown": 5,
    "timer": 180000,
-   "timeout": 180000,
+   "timeout": 1800000,
    "blocks": ["994"],
    "evaluate_chars":  ["=>", "~>", "<", ">", "$"]
 }

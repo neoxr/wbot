@@ -37,7 +37,7 @@ client.on('ready', async () => {
    /* auto restart if ram usage is over */
    const ramCheck = setInterval(() => {
       var ramUsage = process.memoryUsage().rss
-      if (ramUsage >= env.ram_usage) {
+      if (ramUsage >= require('bytes')(env.ram_limit)) {
          clearInterval(ramCheck)
          process.send('reset')
       }
