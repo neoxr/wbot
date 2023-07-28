@@ -1,6 +1,6 @@
-## WBOT (neoxr-bot v4.0-rc)
+## NEOXR-BOT V4.0-RC (BETA)
 
-> Script ini adalah impelementasi dari module [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb) sekaligus base terbaru dari neoxr-bot yang sudah di optimasi menjadi lightweigth.
+> An implementation of [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb) which has been optimized to be lightweigth.
 
 ### Requirements
 
@@ -8,22 +8,23 @@
 - [x] FFMPEG
 - [x] Server vCPU/RAM 1/2GB (Min)
 
-### Konfigurasi
+### Configuration
 
-Terdapat 2 file konfigurasi yaitu ```.env``` dan ```config.json```, sesuaikan terlebih dahulu sebelum melakukan instalasi.
+There are 2 configuration files namely ```.env``` and ```config.json```, adjust them before installing.
 
 ```Javascript
 {
    "owner": "6285887776722",
-   "owner_name": "Wildan Izzudin"
+   "owner_name": "Wildan Izzudin",
    "database": "data",
-   "limit": 25,
-   "ram_usage": 900000000, // <-- 900mb in bytes
-   "max_upload": 60, // <-- 60mb
-   "max_upload_free": 7, // <-- 7mb
-   "cooldown": 5, // <-- 5 seconds
-   "timer": 1800000, // <-- 30 mins in ms
-   "blocks": ["1", "994"],
+   "limit": 15,
+   "ram_limit": "900mb",
+   "max_upload": 50,
+   "max_upload_free": 10,
+   "cooldown": 3,
+   "timer": 180000,
+   "timeout": 1800000,
+   "blocks": ["994", "91", "92"],
    "evaluate_chars":  ["=>", "~>", "<", ">", "$"]
 }
 ```
@@ -36,21 +37,23 @@ API_KEY = 'your_apikey'
 DATABASE_URL = ''
 ```
 
-*Note* : 
-+ ```API_KEY``` : beberapa fitur pada script ini menggunakan apikey terutama fitur downloader, untuk mendapatkan apiKey kalian bisa mendapatkannya di website [Neoxr Api's](https://api.neoxr.my.id) dengan harga yang bervariasi sesuai kebutuhan.
+**Notes** :
++ ```ram_limit``` : ram usage limit, for example you have a server with 1gb of ram set before the maximum capacity is 900mb.
 
-+ ```DATABASE_URL``` : bisa di isi dengan URL mongo dan postgresql untuk mengunakan localdb cukup biarkan kosong saja dan data akan tersimpan kedalam file .json
++ ```API_KEY``` : some of the features in this script use apikey, especially the downloader feature, to get an apiKey you can get it on the [Neoxr Api's](https://api.neoxr.my.id) with prices that vary according to your needs.
 
-### Instalasi & Run
++ ```DATABASE_URL``` : can be filled with mongo and postgresql URLs to use localdb just leave it blank and the data will be saved to the .json file.
 
-Pastikan konfigurasi dan server sesuai requirements agar tidak terjadi kendala pada saat instalasi ataupun saat bot ini berjalan, ketik ini di konsol :
+### Installation & Run
+
+Make sure the configuration and server meet the requirements so that there are no problems during installation or when this bot is running, type this on your console :
 
 ```
 $ yarn
 $ node .
 ```
 
-atau ingin menggunakan pm2
+or want to use pm2
 
 ```
 $ yarn
@@ -60,7 +63,7 @@ $ pm2 start index.js && pm2 save && pm2 logs
 
 ### Command Plugin
 
-*Command Plugin* adalah plugin yang akan berjalan menggunakan perintah/command.
+**Command Plugin** is a plugin that will run using the command.
 
 ```Javascript
 exports.run = {
@@ -95,55 +98,54 @@ exports.run = {
 
 #### Up Side Options :
 
-+ ```usage``` : command utama yang akan otomatis tampil dalam daftar menu, penggunaan usage bisa dalam bentuk array dan string.
++ ```usage``` : main command that will automatically appear in the menu list, use of usage can be in the form of arrays and strings.
 
-+ ```hidden``` : command yang di sembunyikan dari daftar menu, cocok digunakan untuk command aliases atau hidden feature.
++ ```hidden``` : commands that are hidden from the menu list, suitable for command aliases or hidden features.
 
-+ ```use``` : parameter ini bersifat opsional digunakan ketika plugin/fitur memerlukan input seperti link, query, amount, dll.
++ ```use``` : this parameter is optionally used when the plugin / feature requires input such as link, query, amount, etc.
 
-+ ```category``` : kategori untuk setiap plugin yang nantinya command akan tersusun berdasarkan kategori pada saat menu ditampilkan.
++ ```category``` : categories for each plugin that the command will be arranged by category when the menu is displayed.
 
-+ ```m``` : parameter yang berisikan object chat.
++ ```m``` : parameters that contain chat object.
 
-+ ```client``` : parameter yang berisikan beberapa messaging functions dari [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb) dan default functions dari [Baileys](https://github.com/WhiskeySockets/Baileys).
++ ```client``` : parameter which contains several messaging functions from [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb) and default functions from [Baileys](https://github.com/WhiskeySockets/Baileys).
 
-+ ```args``` : input yang diberikan setelah command dalam bentuk array biasanya terdapat pada fitur downloader yang menggunakan link seperti ig, youtube, fb, dll. Parsing berdasarkan index. (Cth : args[1], args[2], args[3], ....)
++ ```args``` : nput given after command in the form of an array is usually found in downloader feature which uses links such as ig, youtube, fb, etc. Parsing based on index. (Example: args[1], args[2], args[3], ....)
 
-+ ```text``` : input yang diberikan setelah command dalam bentuk string biasanya terdapat pada fitur pencarian yang menggunakan query/keyword seperti lirik, chord, yts, dll.
++ ```text``` : input that is given after command in the form of a string is usually found in search features that use queries/keywords such as lyrics, chords, yts, etc.
 
-+ ```isPrefix``` : prefix yang digunakan, jika mode noprefix aktif parameter ini akan blank (no prob).
++ ```isPrefix``` : prefix used, if noprefix mode is active this parameter will be blank (it's no problem).
 
-+ ```command``` : command/perintah yang digunakan, bisa digunakan dalam pengkondisian if else atau switch case ketika membuat 1 plugin dengan beberapa command di dalammnya.
++ ```command``` : commands used can be used in an if else or switch case conditional when creating 1 plugin with several commands in it.
 
-+ ```env``` : parameter yang berisikan konfigurasi dari file config.json
++ ```env``` : parameters that contain the configuration from the config.json file.
 
-+ ```Scraper``` : parameter yang berisikan beberapa scraper functions dari modul [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb).
++ ```Scraper``` : parameter containing some of the scraper functions of [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb) module.
 
-+ ```Func``` : parameter yang berisikan beberapa utilites functions dari modul [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb).
++ ```Func``` : parameter containing some of the utilites functions of [@neoxr/wb](https://www.npmjs.com/package/@neoxr/wb) module.
 
 #### Down Side Options
 
-+ ```error``` : tidak terlalu berguna :v
++ ```error``` : not very useful :v
 
-+ ```limit``` : membatasi penggunaan fitur dengan limit, untuk mengatur jumlah limit berikan data integer dan untuk dafault adalah boolean true untuk 1.
++ ```limit``` : limit the use of features with limits, to set the number of limits give integer data and for default is boolean true for 1.
 
-+ ```premium``` : untuk membuat fitur khusus user premium
++ ```premium``` : to create special features for premium users.
 
-+ ```restrict``` : membatasi input, input yang di batasi berupa badword yang berada di db.setting.toxic.
++ ```restrict``` : limit input, restricted input is in the form of badwords in db.setting.toxic.
 
-+ ```cache``` : opsi untuk auto update pada saat selesai melakukan recode.
++ ```cache``` : option to auto update when done recode.
 
-+ ```__filename``` : path file untuk auto update
++ ```__filename``` : file path for auto update
 
-*Lainnya* :
-
+*Other* :
 ```Javascript
 cmd.async(m, { client, args, text, isPrefix: prefix, prefixes, command, groupMetadata, participants, users, chats, groupSet, setting, isOwner, isAdmin, isBotAdmin, plugins, blockList, env, ctx, Func, Scraper })
 ```
 
 ### Event Plugin
 
-*Event Plugin* adalah plugin yang berjalan otomatis tanpa menggunakan command.
+*Event Plugin* is a plugin that runs automatically without using the command.
 
 ```Javascript
 exports.run = {
@@ -164,15 +166,15 @@ exports.run = {
 }
 ```
 
-+ ```body``` : chat berupa text atau emoticon, plugin ini biasanya digunakan untuk auto respon atau group protector seperti anti link, anti toxic dll.
++ ```body``` : chat in the form of text or emoticons, this plugin is usually used for auto response or group protectors such as anti-links, anti-toxic etc.
 
-+ ```prefixes``` : parameter yang berisi seluruh prefix dalam bentuk array, untuk menggunakannya parsing berdasarkan index. (Cth : prefixes[0]).
++ ```prefixes``` : parameter which contains all prefixes in the form of an array, to use them parse based on index. (Example: prefixes[0]).
 
-Lainnya :
+*Other* :
 ```Javascript
 event.async(m, { client, body, prefixes, groupMetadata, participants, users, chats, groupSet, setting, isOwner, isAdmin, isBotAdmin, plugins, blockList, env, ctx, Func, Scraper })
 ```
 
-Sebagian lainnya silahkan pelajari sendiri dari plugin lain.
+Others please learn by yourself from other plugins.
 
-Cek repository ini secara berkala untuk mendapatkan update di karena kan progress base ini belum 100%, jika mendapati error silahkan buat issue. Thanks.
+Check this repository regularly to get updates because the progress base is not 100% yet, if you find an error, please make an issue. Thanks.
