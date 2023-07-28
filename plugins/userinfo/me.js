@@ -10,7 +10,7 @@ exports.run = {
    }) => {
       let user = global.db.users.find(v => v.jid == m.sender)
       var pic = await Func.fetchBuffer('./media/image/default.jpg')
-      let _own = [...new Set([global.owner, ...global.db.setting.owners])]
+      let _own = [...new Set([env.owner, ...global.db.setting.owners])]
       try {
          var pic = await Func.fetchBuffer(await client.profilePictureUrl(m.sender, 'image'))
       } catch {} finally {
