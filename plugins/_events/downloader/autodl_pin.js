@@ -22,7 +22,9 @@ exports.run = {
                let old = new Date()
                Func.hitstat('pin', m.sender)
                links.map(async link => {
-                  let json = await Api.pin(link)
+                  let json = await Api.neoxr('/pin', {
+                  	url: link
+                  })
                   if (!json.status) return client.reply(m.chat, Func.jsonFormat(json), m)
                   if (/jpg|mp4/.test(json.data.type)) return client.sendFile(m.chat, json.data.url, '', `🍟 *Fetching* : ${((new Date - old) * 1)} ms`, m)
                   if (json.data.type == 'gif') return client.sendFile(m.chat, json.data.url, '', `🍟 *Fetching* : ${((new Date - old) * 1)} ms`, m, {
