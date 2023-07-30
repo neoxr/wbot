@@ -7,6 +7,7 @@ exports.run = {
       text,
       command,
       participants,
+      env,
       Func
    }) => {
       let number = isNaN(text) ? (text.startsWith('+') ? text.replace(/[()+\s-]/g, '') : (text).split`@` [1]) : text
@@ -23,7 +24,7 @@ exports.run = {
          }
       } catch (e) {} finally {
          let is_user = global.db.users
-         let is_owner = [global.client.user.id.split`@` [0], global.owner, ...global.db.setting.owners].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(user)
+         let is_owner = [client.user.id.split`@` [0], env.owner, ...global.db.setting.owners].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(user)
          if (!is_user.some(v => v.jid == user)) return client.reply(m.chat, Func.texted('bold', `🚩 User data not found.`), m)
          if (command == 'ban') {
             if (is_owner) return client.reply(m.chat, Func.texted('bold', `🚩 Can't banned owner number.`), m)
