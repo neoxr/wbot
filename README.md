@@ -14,8 +14,8 @@ There are 2 configuration files namely ```.env``` and ```config.json```, adjust 
 
 ```Javascript
 {
-   "owner": "6285887776722",
-   "owner_name": "Wildan Izzudin",
+   "owner": "6285930928435",
+   "owner_name": "RAHMAT HIDAYAT,
    "database": "data",
    "limit": 15,
    "ram_limit": "900mb",
